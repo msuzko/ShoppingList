@@ -1,6 +1,6 @@
 package com.mec.shopping.ui.event.add
 
-import com.mec.shopping.data.entity.ShoppingEvent
+import com.mec.shopping.dao.entity.ShoppingEvent
 
 data class AddEventDetails(
     val id: Long = 0,

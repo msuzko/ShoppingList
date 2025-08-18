@@ -1,0 +1,14 @@
+package com.mec.shopping.dao.entity
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "shopping_item")
+data class ShoppingItem(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @ColumnInfo(name = "event_id") val eventId: Long,
+    val name: String,
+    val quantity: Double = 1.0,
+    val price: Double = 0.0
+)
