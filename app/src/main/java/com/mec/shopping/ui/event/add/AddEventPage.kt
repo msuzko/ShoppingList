@@ -150,7 +150,7 @@ fun TextInputFields(
         OutlinedTextField(
             value = addEventDetails.initialBudget,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-            onValueChange = { onEventValueChange(addEventDetails.copy(name = it)) },
+            onValueChange = { onEventValueChange(addEventDetails.copy(initialBudget = it)) },
             label = { Text(text = "Initial Budget (optional)") },
             modifier = Modifier
                 .fillMaxSize()
