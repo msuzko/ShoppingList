@@ -48,6 +48,9 @@ private fun NavController(modifier: Modifier) {
         composable<HomeRoute> {
             HomePage(
                 navigateToAddEvent = { navController.navigate(AddEventRoute) },
+                navigateToEventDetails = { id, name ->
+                    navController.navigate(EventDetailsRoute(id, name))
+                },
                 modifier = modifier
             )
         }
