@@ -63,7 +63,6 @@ private fun NavController(modifier: Modifier) {
         }
         composable<EventDetailsRoute> {
             EventDetailsPage(
-                navigateBack = { navController.popBackStack() },
                 navigateUp = { navController.navigateUp() },
                 modifier = modifier
             )
