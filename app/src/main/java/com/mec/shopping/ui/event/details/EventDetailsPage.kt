@@ -27,6 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mec.shopping.ui.common.DismissibleItem
 import com.mec.shopping.ui.common.EditListItem
 import com.mec.shopping.ui.common.EmptyListSurface
 import com.mec.shopping.ui.common.ShoppingAppBar
@@ -84,6 +85,11 @@ fun EventDetailsPage(
                         viewModel.updateItem(it)
                     }
                 },
+                onDeleteItem = {
+                    coroutineScope.launch {
+                        viewModel.deleteItem(it)
+                    }
+                },
                 modifier = modifier.padding(innerPadding)
             )
         }
@@ -98,6 +104,7 @@ fun ShoppingItemList(
     onValueChange: (ItemDetails) -> Unit,
     onEditModeChanged: (ItemDetails) -> Unit,
     onItemUpdate: (ItemDetails) -> Unit,
+    onDeleteItem: (ItemDetails) -> Unit,
     modifier: Modifier
 ) {
     LazyColumn(state = lazyListState, modifier = modifier) {
@@ -121,6 +128,7 @@ fun ShoppingItemList(
                 onValueChange = onValueChange,
                 onItemUpdate = onItemUpdate,
                 onEditModeChanged = onEditModeChanged,
+                onDeleteItem = onDeleteItem,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
             )
         }
@@ -136,6 +144,7 @@ fun SingleItemView(
     onValueChange: (ItemDetails) -> Unit,
     onItemUpdate: (ItemDetails) -> Unit,
     onEditModeChanged: (ItemDetails) -> Unit,
+    onDeleteItem: (ItemDetails) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val item = itemUiState.itemDetails
@@ -147,39 +156,36 @@ fun SingleItemView(
             modifier = modifier
         )
     } else {
-        ListItem(
-            headlineContent = {
-                Text(text = item.name, modifier = Modifier.padding(4.dp))
+        DismissibleItem(
+            onDelete = {
+                onDeleteItem(item)
             },
-            supportingContent = {
-                Text(
-                    text = "Quantity: $${item.quantity}",
-                    modifier = Modifier.padding(4.dp)
-                )
-            },
-            trailingContent = {
-                Text(
-                    text = "$${item.price}",
-                    style = typography.bodyMedium
-                )
-            },
-            leadingContent = {
-                IconButton(onClick = {
-                    onEditModeChanged(item)
-                }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Edit Item")
-                }
-            }
-        )
 
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(text = item.name, modifier = Modifier.padding(4.dp))
+                },
+                supportingContent = {
+                    Text(
+                        text = "Quantity: $${item.quantity}",
+                        modifier = Modifier.padding(4.dp)
+                    )
+                },
+                trailingContent = {
+                    Text(
+                        text = "$${item.price}",
+                        style = typography.bodyMedium
+                    )
+                },
+                leadingContent = {
+                    IconButton(onClick = {
+                        onEditModeChanged(item)
+                    }) {
+                        Icon(Icons.Default.Edit, contentDescription = "Edit Item")
+                    }
+                }
+            )
+        }
     }
 }
-
-//@Preview
-//@Composable
-//private fun EventDetailsPreview() {
-//    EventDetailsPage(
-//        navigateBack = {},
-//        navigateUp = {}
-//    )
-//}

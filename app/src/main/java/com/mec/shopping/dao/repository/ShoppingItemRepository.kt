@@ -6,23 +6,23 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface ShoppingItemRepository {
-    suspend fun insertEvent(event: ShoppingItem)
+    suspend fun insertItem(event: ShoppingItem)
 
-    suspend fun updateEvent(event: ShoppingItem)
+    suspend fun updateItem(event: ShoppingItem)
 
-    suspend fun deleteEvent(event: ShoppingItem)
+    suspend fun deleteItem(event: ShoppingItem)
 
-    fun getAllEvents(): Flow<List<ShoppingItem>>
+    fun getAllItems(): Flow<List<ShoppingItem>>
 }
 
 class ShoppingItemRepositoryImpl @Inject
 constructor(val shoppingItemDao: ShoppingItemDao) : ShoppingItemRepository {
 
-    override suspend fun insertEvent(event: ShoppingItem) = shoppingItemDao.insert(event)
+    override suspend fun insertItem(event: ShoppingItem) = shoppingItemDao.insert(event)
 
-    override suspend fun updateEvent(event: ShoppingItem) = shoppingItemDao.update(event)
+    override suspend fun updateItem(event: ShoppingItem) = shoppingItemDao.update(event)
 
-    override suspend fun deleteEvent(event: ShoppingItem) = shoppingItemDao.delete(event)
+    override suspend fun deleteItem(event: ShoppingItem) = shoppingItemDao.delete(event)
 
-    override fun getAllEvents(): Flow<List<ShoppingItem>> = shoppingItemDao.getAllEvents()
+    override fun getAllItems(): Flow<List<ShoppingItem>> = shoppingItemDao.getAllEvents()
 }

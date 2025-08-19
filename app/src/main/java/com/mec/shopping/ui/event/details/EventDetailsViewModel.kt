@@ -32,7 +32,7 @@ class EventDetailsViewModel @Inject constructor(
 
     suspend fun addItem() {
         val item = ShoppingItem(eventId = detailsRoute.id, name = "Item")
-        itemRepository.insertEvent(item)
+        itemRepository.insertItem(item)
     }
 
     init {
@@ -79,6 +79,10 @@ class EventDetailsViewModel @Inject constructor(
     }
 
     suspend fun updateItem(itemDetails: ItemDetails) {
-        itemRepository.updateEvent(itemDetails.toShoppingItem())
+        itemRepository.updateItem(itemDetails.toShoppingItem())
+    }
+
+    suspend fun deleteItem(itemDetails: ItemDetails) {
+        itemRepository.deleteItem(itemDetails.toShoppingItem())
     }
 }
