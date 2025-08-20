@@ -18,12 +18,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mec.shopping.dao.entity.ShoppingEvent
 import com.mec.shopping.ui.common.EmptyListSurface
 import com.mec.shopping.ui.common.ShoppingAppBar
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomePage(
@@ -33,6 +35,7 @@ fun HomePage(
     viewModule: HomeViewModule = hiltViewModel()
 ) {
     val uiState by viewModule.homeUiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
             ShoppingAppBar(
@@ -57,6 +60,11 @@ fun HomePage(
             ShoppingList(
                 shoppingEvents = uiState.events,
                 navigateToEventDetails = navigateToEventDetails,
+                onDeleteEvent = {
+                    coroutineScope.launch {
+                        viewModule.deleteEvent(it)
+                    }
+                },
                 modifier = modifier
                     .fillMaxSize()
                     .padding(innerPadding)
@@ -69,6 +77,7 @@ fun HomePage(
 fun ShoppingList(
     shoppingEvents: List<ShoppingEvent>,
     navigateToEventDetails: (Long, String) -> Unit,
+    onDeleteEvent: (ShoppingEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
@@ -77,7 +86,8 @@ fun ShoppingList(
                 event = shoppingEvents[event],
                 modifier = Modifier
                     .fillMaxSize(),
-                onTapEvent = navigateToEventDetails
+                onTapEvent = navigateToEventDetails,
+                onDeleteEvent = onDeleteEvent
             )
         }
     }
@@ -87,6 +97,7 @@ fun ShoppingList(
 fun ShoppingEventItem(
     event: ShoppingEvent,
     onTapEvent: (Long, String) -> Unit,
+    onDeleteEvent: (ShoppingEvent) -> Unit,
     modifier: Modifier
 ) {
     ListItem(
@@ -104,7 +115,9 @@ fun ShoppingEventItem(
             )
         },
         leadingContent = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                onDeleteEvent(event)
+            }) {
                 Icon(Icons.Filled.Delete, contentDescription = "Delete Event")
             }
         },

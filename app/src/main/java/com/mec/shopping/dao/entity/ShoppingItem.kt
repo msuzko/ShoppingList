@@ -2,9 +2,20 @@ package com.mec.shopping.dao.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "shopping_item")
+@Entity(
+    tableName = "shopping_item",
+    foreignKeys = [
+        ForeignKey(
+            entity = ShoppingEvent::class,
+            parentColumns = ["id"],
+            childColumns = ["event_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class ShoppingItem(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "item_id") val id: Long = 0,
