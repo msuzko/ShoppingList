@@ -19,6 +19,6 @@ interface ShoppingItemDao {
     @Delete
     suspend fun delete(event: ShoppingItem)
 
-    @Query("SELECT * FROM shopping_item")
+    @Query("SELECT * FROM shopping_item")//NON-NLS
     fun getAllEvents(): Flow<List<ShoppingItem>>
 }

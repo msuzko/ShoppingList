@@ -20,8 +20,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mec.shopping.R
 import com.mec.shopping.dao.entity.ShoppingEvent
 import com.mec.shopping.ui.common.EmptyListSurface
 import com.mec.shopping.ui.common.ShoppingAppBar
@@ -39,20 +41,20 @@ fun HomePage(
     Scaffold(
         topBar = {
             ShoppingAppBar(
-                title = "Shopping Events",
+                title = stringResource(R.string.shopping_events),
                 canNavigateBack = false
             )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = navigateToAddEvent) {
-                Icon(Icons.Filled.Add, contentDescription = "Add Event")
+                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add_event))
             }
         },
         floatingActionButtonPosition = FabPosition.Center
     ) { innerPadding ->
         if (uiState.events.isEmpty()) {
             EmptyListSurface(
-                message = "No events found. \nClick the '+' button to add a new event.",
+                message = stringResource(R.string.no_events_found_click_the_button_to_add_a_new_event),
                 modifier = modifier.padding(innerPadding)
             )
             return@Scaffold
@@ -118,7 +120,7 @@ fun ShoppingEventItem(
             IconButton(onClick = {
                 onDeleteEvent(event)
             }) {
-                Icon(Icons.Filled.Delete, contentDescription = "Delete Event")
+                Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.delete_event))
             }
         },
         modifier = modifier

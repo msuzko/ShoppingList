@@ -25,8 +25,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mec.shopping.R
 import com.mec.shopping.ui.common.DismissibleItem
 import com.mec.shopping.ui.common.EditListItem
 import com.mec.shopping.ui.common.EmptyListSurface
@@ -47,7 +49,7 @@ fun EventDetailsPage(
     Scaffold(
         topBar = {
             ShoppingAppBar(
-                title = "Event Details",
+                title = stringResource(R.string.event_details),
                 canNavigateBack = true,
                 navigateUp = navigateUp
             )
@@ -61,15 +63,15 @@ fun EventDetailsPage(
                     }
                 }
             }) {
-                Icon(Icons.Default.Add, contentDescription = "Add Item")
-                Text(text = "Add Item")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.add_item))
+                Text(text = stringResource(R.string.add_item))
             }
         }, floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
         if (uiState.itemList.isEmpty()) {
             EmptyListSurface(
-                message = "No items found. \nClick the '+' button to add a new item.",
+                message = stringResource(R.string.no_items_found_click_the_button_to_add_a_new_item),
                 modifier = modifier.padding(innerPadding)
             )
             return@Scaffold
@@ -113,7 +115,7 @@ fun ShoppingItemList(
                 colors = ListItemDefaults.colors(colorScheme.primaryContainer),
                 headlineContent = {
                     Text(
-                        text = "Budget: $${eventDetails.initialBudget}",
+                        text = stringResource(R.string.budget, eventDetails.initialBudget),
                         style = typography.bodyLarge
                     )
                 },
@@ -168,7 +170,7 @@ fun SingleItemView(
                 },
                 supportingContent = {
                     Text(
-                        text = "Quantity: $${item.quantity}",
+                        text = stringResource(R.string.quantity, item.quantity),
                         modifier = Modifier.padding(4.dp)
                     )
                 },
@@ -182,7 +184,7 @@ fun SingleItemView(
                     IconButton(onClick = {
                         onEditModeChanged(item)
                     }) {
-                        Icon(Icons.Default.Edit, contentDescription = "Edit Item")
+                        Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.edit_item))
                     }
                 }
             )

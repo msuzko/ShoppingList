@@ -25,7 +25,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.mec.shopping.R
 
 @Composable
 fun DismissibleItem(
@@ -54,8 +56,8 @@ fun DismissibleItem(
     )
     if (showDialog) {
         AlertDialog(
-            title = { Text("Delete Item") },
-            text = { Text("Are you sure you want to delete this item?") },
+            title = { Text(stringResource(R.string.delete_item)) },
+            text = { Text(stringResource(R.string.are_you_sure_you_want_to_delete_this_item)) },
             onDismissRequest = { showDialog = false },
             confirmButton = {
                 IconButton(onClick = {
@@ -63,7 +65,7 @@ fun DismissibleItem(
                     dismissItem = true
                     onDelete()
                 }) {
-                    Icon(Icons.Default.Done, contentDescription = "Confirm Delete")
+                    Icon(Icons.Default.Done, contentDescription = stringResource(R.string.confirm_delete))
                 }
             },
             dismissButton = {
@@ -71,7 +73,7 @@ fun DismissibleItem(
                     showDialog = false
                     dismissItem = false
                 }) {
-                    Icon(Icons.Default.Close, contentDescription = "Cancel Delete")
+                    Icon(Icons.Default.Close, contentDescription = stringResource(R.string.cancel_delete))
                 }
             }
         )
@@ -99,7 +101,7 @@ fun DismissibleItem(
                     .background(backgroundColor),
                 contentAlignment = Alignment.CenterEnd
             ) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete Item")
+                Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete_item))
             }
         },
         enableDismissFromStartToEnd = false

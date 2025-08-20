@@ -1,9 +1,11 @@
 package com.mec.shopping.ui.event.details
 
+import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.mec.shopping.R
 import com.mec.shopping.dao.entity.ShoppingEvent
 import com.mec.shopping.dao.entity.ShoppingItem
 import com.mec.shopping.dao.repository.ShoppingEventRepository
@@ -23,6 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EventDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
+    private val app: Application,
     private val shoppingEventRepository: ShoppingEventRepository,
     private val itemRepository: ShoppingItemRepository
 ) : ViewModel() {
@@ -31,7 +34,7 @@ class EventDetailsViewModel @Inject constructor(
     val eventDetailUiState = _eventDetailUiState.asStateFlow()
 
     suspend fun addItem() {
-        val item = ShoppingItem(eventId = detailsRoute.id, name = "Item")
+        val item = ShoppingItem(eventId = detailsRoute.id, name = app.getString(R.string.item))
         itemRepository.insertItem(item)
     }
 

@@ -13,8 +13,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.mec.shopping.R
 import com.mec.shopping.ui.event.details.ItemDetails
 
 @Composable
@@ -33,7 +35,7 @@ fun EditListItem(
                 onValueChange = { newName ->
                     onValueChange(itemDetails.copy(name = newName))
                 },
-                label = { Text("Item Name") },
+                label = { Text(stringResource(R.string.item_name)) },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(4.dp)
@@ -47,7 +49,7 @@ fun EditListItem(
                     onValueChange = { newQuantity ->
                         onValueChange(itemDetails.copy(quantity = newQuantity))
                     },
-                    label = { Text("Item Name") },
+                    label = { Text(stringResource(R.string.item_name)) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(4.dp)
@@ -58,7 +60,7 @@ fun EditListItem(
                     onValueChange = { newPrice ->
                         onValueChange(itemDetails.copy(price = newPrice))
                     },
-                    label = { Text("Item Name") },
+                    label = { Text(stringResource(R.string.item_name)) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(4.dp)
@@ -69,7 +71,7 @@ fun EditListItem(
             IconButton(onClick = {
                 onItemUpdate(itemDetails)
             }) {
-                Icon(Icons.Filled.Done, contentDescription = "Update Item")
+                Icon(Icons.Filled.Done, contentDescription = stringResource(R.string.update_item))
             }
         }
     )

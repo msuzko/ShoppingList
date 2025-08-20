@@ -7,7 +7,7 @@ import java.util.Locale
 import java.util.TimeZone
 
 
-fun formatDate(millis: Long?, pattern: String = "EEE MMM dd yyyy"): String {
+fun formatDate(millis: Long?, pattern: String = "EEE MMM dd yyyy"): String {//NON-NLS
     if (millis == null) {
         return ""
     }

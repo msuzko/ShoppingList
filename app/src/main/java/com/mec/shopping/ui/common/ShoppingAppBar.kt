@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.mec.shopping.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +30,7 @@ fun ShoppingAppBar(
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back"
+                        contentDescription = stringResource(R.string.back)
                     )
                 }
             }

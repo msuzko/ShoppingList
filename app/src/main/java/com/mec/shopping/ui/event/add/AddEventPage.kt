@@ -22,10 +22,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mec.shopping.R
 import com.mec.shopping.ui.common.DatePicker
 import com.mec.shopping.ui.common.ShoppingAppBar
 import com.mec.shopping.utils.formatDate
@@ -42,7 +44,7 @@ fun AddEventPage(
     Scaffold(
         topBar = {
             ShoppingAppBar(
-                title = "Add Event",
+                title = stringResource(R.string.add_event),
                 canNavigateBack = true,
                 navigateUp = navigateUp
             )
@@ -93,7 +95,7 @@ fun EventForm(
                 .fillMaxSize()
                 .padding(20.dp)
         ) {
-            Text(text = "Save")
+            Text(text = stringResource(R.string.save))
         }
     }
 }
@@ -123,7 +125,7 @@ fun DatePickerUi(
         ElevatedButton(onClick = { openDatePickerDialog = true }) {
             Text(
                 text = uiState.addEventDetails.eventDate.ifBlank {
-                    "Select Date"
+                    stringResource(R.string.select_date)
                 }
             )
         }
@@ -142,7 +144,7 @@ fun TextInputFields(
             value = addEventDetails.name,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             onValueChange = { onEventValueChange(addEventDetails.copy(name = it)) },
-            label = { Text(text = "Event Name") },
+            label = { Text(text = stringResource(R.string.event_name)) },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
@@ -151,7 +153,7 @@ fun TextInputFields(
             value = addEventDetails.initialBudget,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
             onValueChange = { onEventValueChange(addEventDetails.copy(initialBudget = it)) },
-            label = { Text(text = "Initial Budget (optional)") },
+            label = { Text(text = stringResource(R.string.initial_budget_optional)) },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)

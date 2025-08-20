@@ -2,9 +2,9 @@ pluginManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com\\.android.*")//NON-NLS
+                includeGroupByRegex("com\\.google.*")//NON-NLS
+                includeGroupByRegex("androidx.*")//NON-NLS
             }
         }
         mavenCentral()
@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Shopping"
-include(":app")
+rootProject.name = "Shopping"//NON-NLS
+include(":app")//NON-NLS
  
